@@ -1,0 +1,29 @@
+--- AI ER Triage Model Evaluation Report ---
+
+Model: Random Forest Classifier
+AUC-ROC Score: 1.0000
+
+Classification Report:
+               precision    recall  f1-score   support
+
+ Low Risk (0)       1.00      1.00      1.00      2406
+High Risk (1)       1.00      0.99      0.99       594
+
+     accuracy                           1.00      3000
+    macro avg       1.00      0.99      1.00      3000
+ weighted avg       1.00      1.00      1.00      3000
+
+Confusion Matrix:
+[[2406    0]
+ [   6  588]]
+
+Feature Importances:
+             Feature  Importance
+      Heart_Rate_BPM    0.194420
+Respiratory_Rate_BPM    0.189377
+       Temperature_C    0.178138
+        SpO2_Percent    0.157138
+    Systolic_BP_mmHg    0.101668
+      Mood_Score_1_5    0.070457
+   Diastolic_BP_mmHg    0.060286
+              HRV_ms    0.048517
