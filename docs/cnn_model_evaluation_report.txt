@@ -1,0 +1,19 @@
+--- AI ER Triage CNN Model Evaluation Report ---
+
+Model: 1D Convolutional Neural Network
+Epochs: 10, Batch Size: 32
+AUC-ROC Score: 0.9955
+
+Classification Report:
+               precision    recall  f1-score   support
+
+ Low Risk (0)       0.97      0.99      0.98      2322
+High Risk (1)       0.95      0.91      0.93       678
+
+     accuracy                           0.97      3000
+    macro avg       0.96      0.95      0.95      3000
+ weighted avg       0.97      0.97      0.97      3000
+
+Confusion Matrix:
+[[2289   33]
+ [  63  615]]

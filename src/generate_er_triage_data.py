@@ -51,11 +51,11 @@ def generate_vitals(is_high_risk):
     # Base distributions (Normal/Low Risk)
     # Base distributions (Normal/Low Risk)
     # Define parameters for a simple normal distribution approximation
-    hr_mean, hr_sd, hr_low, hr_high = 75, 15, 40, 130
-    rr_mean, rr_sd, rr_low, rr_high = 16, 3, 8, 25
-    sbp_mean, sbp_sd, sbp_low, sbp_high = 120, 15, 90, 200
+    hr_mean, hr_sd, hr_low, hr_high = 78, 18, 35, 140  # Widen the 'normal' range slightly
+    rr_mean, rr_sd, rr_low, rr_high = 17, 4, 6, 28 # Widen the 'normal' range slightly
+    sbp_mean, sbp_sd, sbp_low, sbp_high = 125, 20, 85, 210 # Widen the 'normal' range slightly
     dbp_mean, dbp_sd, dbp_low, dbp_high = 80, 10, 50, 120
-    spo2_mean, spo2_sd, spo2_low, spo2_high = 97, 1.5, 90, 100
+    spo2_mean, spo2_sd, spo2_low, spo2_high = 96.5, 2.0, 88, 100 # Widen the 'normal' range slightly
     temp_mean, temp_sd, temp_low, temp_high = 37.0, 0.5, 35.0, 39.0
     hrv_mean, hrv_sd, hrv_low, hrv_high = 50, 15, 10, 100
     mood_mean, mood_sd, mood_low, mood_high = 4, 1, 1, 5
@@ -78,26 +78,26 @@ def generate_vitals(is_high_risk):
 
         if abnormality_type == "HR_Abnormal":
             if np.random.rand() < 0.5: # Tachycardia
-                vitals["Heart_Rate_BPM"] = int(get_truncated_normal_rvs(140, 10, 131, 180)[0])
+                vitals["Heart_Rate_BPM"] = int(get_truncated_normal_rvs(135, 15, 120, 180)[0]) # Make less severe
             else: # Bradycardia
-                vitals["Heart_Rate_BPM"] = int(get_truncated_normal_rvs(35, 5, 20, 39)[0])
+                vitals["Heart_Rate_BPM"] = int(get_truncated_normal_rvs(45, 8, 30, 50)[0]) # Make less severe
 
         elif abnormality_type == "RR_Abnormal":
             if np.random.rand() < 0.5: # Tachypnea
-                vitals["Respiratory_Rate_BPM"] = int(get_truncated_normal_rvs(30, 5, 26, 40)[0])
+                vitals["Respiratory_Rate_BPM"] = int(get_truncated_normal_rvs(28, 6, 22, 40)[0]) # Make less severe
             else: # Bradypnea
-                vitals["Respiratory_Rate_BPM"] = int(get_truncated_normal_rvs(6, 1, 4, 7)[0])
+                vitals["Respiratory_Rate_BPM"] = int(get_truncated_normal_rvs(8, 2, 5, 10)[0]) # Make less severe
 
         elif abnormality_type == "SBP_Abnormal":
             if np.random.rand() < 0.7: # Hypotension (more common in critical)
-                vitals["Systolic_BP_mmHg"] = int(get_truncated_normal_rvs(80, 5, 60, 89)[0])
+                vitals["Systolic_BP_mmHg"] = int(get_truncated_normal_rvs(88, 8, 70, 95)[0]) # Make less severe
             else: # Severe Hypertension
-                vitals["Systolic_BP_mmHg"] = int(get_truncated_normal_rvs(210, 10, 201, 250)[0])
+                vitals["Systolic_BP_mmHg"] = int(get_truncated_normal_rvs(190, 15, 170, 240)[0]) # Make less severe
             # Adjust DBP to maintain a plausible pulse pressure
             vitals["Diastolic_BP_mmHg"] = int(vitals["Systolic_BP_mmHg"] * np.random.uniform(0.6, 0.75))
 
         elif abnormality_type == "SpO2_Abnormal":
-            vitals["SpO2_Percent"] = round(get_truncated_normal_rvs(85, 3, 70, 89.9)[0], 1)
+            vitals["SpO2_Percent"] = round(get_truncated_normal_rvs(88, 4, 80, 92)[0], 1) # Make less severe
 
         elif abnormality_type == "Temp_Abnormal":
             if np.random.rand() < 0.5: # Fever
@@ -136,7 +136,7 @@ def assign_risk_label(vitals):
                             (temp < 36.0 or temp > 38.0) or \
                             (vitals["HRV_ms"] < 20)
 
-    if mood == 1 and is_abnormal_secondary:
+    if mood <= 2 and is_abnormal_secondary: # Broaden mood criteria
         return 1
 
     return 0
@@ -175,5 +175,5 @@ print(f"Generated High Risk Count: {final_high_risk_count}")
 print(f"Generated Low Risk Count: {NUM_PATIENTS - final_high_risk_count}")
 
 # Save to CSV
-df.to_csv("er_triage_dataset_15k.csv", index=False)
-print("Dataset saved to er_triage_dataset_15k.csv")
+df.to_csv("er_triage_dataset_15k_noisy.csv", index=False)
+print("Dataset saved to er_triage_dataset_15k_noisy.csv")
