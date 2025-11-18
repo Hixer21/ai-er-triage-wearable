@@ -18,10 +18,10 @@ except ImportError:
     exit()
 
 # --- Configuration ---
-DATA_PATH = 'data/er_triage_dataset_15k_noisy.csv'
+DATA_PATH = 'data/er_triage_dataset_15k_amman.csv'
 MODEL_DIR = 'models'
-REPORT_PATH = 'docs/cnn_model_evaluation_report.txt'
-CM_PATH = 'docs/cnn_confusion_matrix.png'
+REPORT_PATH = 'docs/cnn_model_evaluation_report_thesis.txt'
+CM_PATH = 'docs/cnn_confusion_matrix_thesis.png'
 EPOCHS = 10
 BATCH_SIZE = 32
 
@@ -56,17 +56,17 @@ def build_cnn_model(input_shape):
     """Builds a simple 1D Convolutional Neural Network model."""
     model = Sequential([
         # First Conv layer
-        Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=input_shape),
-        Dropout(0.2),
+        Conv1D(filters=16, kernel_size=3, activation='relu', input_shape=input_shape), # Reduced filters
+        Dropout(0.5), # Increased dropout
         
         # Second Conv layer
-        Conv1D(filters=64, kernel_size=3, activation='relu'),
-        Dropout(0.3),
+        Conv1D(filters=32, kernel_size=3, activation='relu'), # Reduced filters
+        Dropout(0.6), # Increased dropout
         
         # Flatten and Dense layers
         Flatten(),
-        Dense(64, activation='relu'),
-        Dropout(0.5),
+        Dense(32, activation='relu'), # Reduced dense layer size
+        Dropout(0.7), # Increased dropout
         Dense(1, activation='sigmoid') # Binary classification output
     ])
     

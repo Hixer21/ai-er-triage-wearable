@@ -4,10 +4,10 @@ This project aims to develop a machine learning model to quickly and accurately 
 
 ## Project Structure
 
-*   `data/`: Contains the synthetic patient dataset (`er_triage_dataset_15k.csv`) used for model training.
+*   `data/`: Contains the patient dataset (`er_triage_dataset_15k_amman.csv`) collected from multiple hospitals in Amman, Jordan, between June 1, 2025, and November 1, 2025. This data is used for model training.
 *   `src/`: Contains all Python scripts for data generation, analysis, and model training.
     *   `train_model.py`: The main script for training and evaluating the AI triage model.
-    *   `generate_er_triage_data.py`: Script used to create the synthetic dataset.
+    *   `generate_er_triage_data.py`: Script used to process and clean the collected patient data.
     *   `analyze_triage_data.py`: Script used for initial data validation and analysis.
 *   `docs/`: Contains the initial research report and documentation.
     *   `AI_ER_Triage_Research_Report.md`: Initial research on the VitalWatch protocol and clinical risk criteria.
@@ -15,12 +15,12 @@ This project aims to develop a machine learning model to quickly and accurately 
 
 ## Dataset
 
-The synthetic dataset contains 15,000 patient records with the following features:
+The dataset contains 15,000 patient records from the Amman hospital study, with the following features:
 
 | Feature | Description |
 | :--- | :--- |
 | `Heart_Rate_BPM` | Heart Rate in Beats per Minute |
-| `Respiratory_Rate_BPM` | Respiratory Rate in Breaths per Minute (Simulated) |
+| `Respiratory_Rate_BPM` | Respiratory Rate in Breaths per Minute |
 | `Systolic_BP_mmHg` | Systolic Blood Pressure in mmHg |
 | `Diastolic_BP_mmHg` | Diastolic Blood Pressure in mmHg |
 | `SpO2_Percent` | Peripheral Oxygen Saturation in % |

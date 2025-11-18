@@ -1,0 +1,19 @@
+--- AI ER Triage CNN Model Evaluation Report (Amman Hospital Study) ---
+
+Model: 1D Convolutional Neural Network
+Epochs: 10, Batch Size: 32
+AUC-ROC Score: 0.9792
+
+Classification Report:
+               precision    recall  f1-score   support
+
+ Low Risk (0)       0.92      0.97      0.95      2322
+High Risk (1)       0.89      0.73      0.80       678
+
+     accuracy                           0.92      3000
+    macro avg       0.90      0.85      0.87      3000
+ weighted avg       0.92      0.92      0.91      3000
+
+Confusion Matrix:
+[[2258   64]
+ [ 184  494]]

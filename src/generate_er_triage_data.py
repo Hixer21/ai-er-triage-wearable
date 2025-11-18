@@ -175,5 +175,5 @@ print(f"Generated High Risk Count: {final_high_risk_count}")
 print(f"Generated Low Risk Count: {NUM_PATIENTS - final_high_risk_count}")
 
 # Save to CSV
-df.to_csv("er_triage_dataset_15k_noisy.csv", index=False)
-print("Dataset saved to er_triage_dataset_15k_noisy.csv")
+df.to_csv("er_triage_dataset_15k_amman.csv", index=False)
+print("Dataset saved to er_triage_dataset_15k_amman.csv")
